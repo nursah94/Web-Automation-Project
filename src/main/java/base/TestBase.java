@@ -8,23 +8,29 @@ import java.util.Properties;
 
 public class TestBase {
 
-    private static Properties prop;
-    protected WebDriver driver;
+    public static Properties prop;
+    public WebDriver driver;
+    public WebDriverWait wait;
 
-    private static String propertiesFilePath = System.getProperty("user.dir") + "/src/main/java/config/config.properties";
 
-    public TestBase(WebDriver driver) {
+    public TestBase(WebDriver driver, WebDriverWait wait) {
         this.driver = driver;
+        this.wait = wait;
     }
 
+
     public static Properties prop() {
+
         try {
             prop = new Properties();
-            FileInputStream ip = new FileInputStream(propertiesFilePath);
+            FileInputStream ip = new FileInputStream(System.getProperty("user.dir") + "/src/main/java/config/config.properties");
             prop.load(ip);
+            return prop;
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return prop;
+        return null;
     }
+
+
 }

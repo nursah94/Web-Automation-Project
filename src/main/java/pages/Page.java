@@ -3,14 +3,14 @@ package pages;
 import base.TestBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.testng.Assert;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.Objects;
 
 public class Page extends TestBase {
 
-    public Page(WebDriver driver) {
-        super(driver);
+    public Page(WebDriver driver, WebDriverWait wait) {
+        super(driver, wait);
     }
 
     private final static String inputEmail = "//input[@id='EmailLogin']";
@@ -19,7 +19,6 @@ public class Page extends TestBase {
     private final static String popUpModal = "//div[@class='modal-body']";
     private final static String popUpCloseButton = "//button[@class='btn btn-primary']";
     private final static String messageRequiredFields = "//span[@id='EmailLogin-error']";
-    private final static String textMyAccount = "//div[@class='header__right-col']//span[@class='user-menu__title'][contains(text(),'My Account')]";
 
     // Opens lolaflora.com/login
     public void goToLoginPage() {
@@ -55,11 +54,6 @@ public class Page extends TestBase {
         driver.findElement(By.xpath(messageRequiredFields)).isDisplayed();
     }
 
-    // Checks if the user successfully logged in
-    public void checkMyAccountText() throws InterruptedException {
-        Thread.sleep(2000);
-        String text = driver.findElement(By.xpath(textMyAccount)).getText();
-        Assert.assertEquals("My Account", text);
-    }
+
 }
 
